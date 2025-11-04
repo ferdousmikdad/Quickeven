@@ -1,16 +1,92 @@
-# React + Vite
+# Quickeven
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An innovative interactive learning platform designed to make education engaging and accessible.
 
-Currently, two official plugins are available:
+## About Quickeven
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Quickeven is a modern learning platform that brings education to life through interactive experiences and engaging visual design. Our mission is to create an environment where learners can explore, discover, and grow their knowledge in an intuitive and enjoyable way.
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Interactive Learning Environment**: Engaging animations and visual feedback to enhance the learning experience
+- **Modern Design**: Clean, responsive interface built with React and Tailwind CSS
+- **Smooth Animations**: Utilizing GSAP for fluid, professional animations that make learning delightful
+- **Accessible Platform**: Web-based learning accessible from any device with an internet connection
 
-## Expanding the ESLint configuration
+## Technology Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Frontend**: React 19 with Vite
+- **Styling**: Tailwind CSS
+- **Animations**: GSAP (GreenSock Animation Platform)
+- **Build Tool**: Vite
+- **Language**: TypeScript for type safety and better development experience
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (version 20.19+ or 22.12+)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/ferdousmikdad/Quickeven.git
+   ```
+
+2. Navigate to the project directory:
+   ```bash
+   cd Quickeven
+   ```
+
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+5. Open your browser and navigate to `http://localhost:5173`
+
+## Development
+
+### Available Scripts
+
+- `npm run dev` - Start the development server
+- `npm run build` - Build the project for production
+- `npm run preview` - Preview the production build locally
+- `npm run lint` - Run ESLint to check code quality
+
+### Project Structure
+
+```
+src/
+├── components/
+│   └── v1/
+│       └── skiper39/
+│           ├── Skiper39.tsx       # Main component
+│           ├── CrowdCanvas.tsx    # Interactive crowd animation
+│           └── index.ts           # Component exports
+├── App.jsx                        # Root component
+└── main.jsx                       # Application entry point
+```
+
+## Contributing
+
+We welcome contributions to make Quickeven even better! Please feel free to submit issues and enhancement requests.
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## Author
+
+Created and maintained by Ferdous Mikdad
+
+---
+
+*Empowering learners through innovative digital education*
