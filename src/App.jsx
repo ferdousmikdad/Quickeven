@@ -1,9 +1,7 @@
+import { Skiper39 } from "@/components/v1/skiper39";
+
 function App() {
-  return (
-    <div className="min-h-screen flex items-center justify-center">
-      <h1 className="text-6xl font-bold text-gray-800">Quickeven</h1>
-    </div>
-  )
+  return <Skiper39 />;
 }
 
 export default App
