@@ -55,14 +55,18 @@ export class GameState {
 
   incrementBlocksDestroyed() {
     this.blocksDestroyed++;
+    const isMobile = window.innerWidth <= 768;
 
     // Increase speed when blocks are destroyed
     if (GAME_CONFIG.game.acceleration.enabled) {
+      const speedIncrease = isMobile ? GAME_CONFIG.game.acceleration.mobileSpeedIncrease : GAME_CONFIG.game.acceleration.speedIncrease;
+      const maxMultiplier = isMobile ? GAME_CONFIG.game.acceleration.mobileMaxMultiplier : GAME_CONFIG.game.acceleration.maxMultiplier;
+
       this.currentSpeedMultiplier = Math.min(
-        this.currentSpeedMultiplier + GAME_CONFIG.game.acceleration.speedIncrease,
-        GAME_CONFIG.game.acceleration.maxMultiplier
+        this.currentSpeedMultiplier + speedIncrease,
+        maxMultiplier
       );
-      console.log('Speed increased to multiplier:', this.currentSpeedMultiplier);
+      console.log('Speed increased to multiplier:', this.currentSpeedMultiplier, 'isMobile:', isMobile);
     }
 
     if (this.blocksDestroyed >= this.totalBlocks) {
@@ -75,13 +79,17 @@ export class GameState {
       return 1.0;
     }
 
+    const isMobile = window.innerWidth <= 768;
+
     // Add time-based acceleration
     const elapsedTime = this.isPlaying ? (Date.now() - this.gameStartTime) / 1000 : 0;
-    const timeBasedIncrease = elapsedTime * GAME_CONFIG.game.acceleration.intervalIncrease;
+    const intervalIncrease = isMobile ? GAME_CONFIG.game.acceleration.mobileIntervalIncrease : GAME_CONFIG.game.acceleration.intervalIncrease;
+    const maxMultiplier = isMobile ? GAME_CONFIG.game.acceleration.mobileMaxMultiplier : GAME_CONFIG.game.acceleration.maxMultiplier;
+    const timeBasedIncrease = elapsedTime * intervalIncrease;
 
     return Math.min(
       this.currentSpeedMultiplier + timeBasedIncrease,
-      GAME_CONFIG.game.acceleration.maxMultiplier
+      maxMultiplier
     );
   }
 

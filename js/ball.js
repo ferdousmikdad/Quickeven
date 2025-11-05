@@ -12,7 +12,7 @@ export class Ball {
     this.rotation = 0;
     this.angularVelocity = 0;
     this.gameState = null;
-    this.baseSpeed = GAME_CONFIG.ball.speed;
+    this.baseSpeed = this.isMobile ? GAME_CONFIG.ball.mobileSpeed : GAME_CONFIG.ball.speed;
     this.updateIconSize();
   }
 
@@ -21,6 +21,19 @@ export class Ball {
     this.element.style.width = `${size}px`;
     this.element.style.height = `${size}px`;
     this.radius = size / 2;
+  }
+
+  checkMobileStatus() {
+    const wasMobile = this.isMobile;
+    this.isMobile = window.innerWidth <= 768;
+
+    // Update ball size if mobile status changed
+    if (wasMobile !== this.isMobile) {
+      this.updateIconSize();
+      // Update base speed for mobile status change
+      this.baseSpeed = this.isMobile ? GAME_CONFIG.ball.mobileSpeed : GAME_CONFIG.ball.speed;
+      console.log('Mobile status changed:', this.isMobile, 'new baseSpeed:', this.baseSpeed);
+    }
   }
 
   init() {
@@ -47,17 +60,21 @@ export class Ball {
 
   launch() {
     if (!this.isLaunched) {
-      const velocity = getRandomVelocity(GAME_CONFIG.ball.speed);
+      const launchSpeed = this.isMobile ? GAME_CONFIG.ball.mobileSpeed : GAME_CONFIG.ball.speed;
+      const velocity = getRandomVelocity(launchSpeed);
       this.velocity = {
         x: velocity.x,
         y: -Math.abs(velocity.y) // Always launch upward
       };
       this.isLaunched = true;
-      console.log('Ball launched with velocity:', this.velocity);
+      console.log('Ball launched with velocity:', this.velocity, 'isMobile:', this.isMobile);
     }
   }
 
   update() {
+    // Check if mobile status changed (window resize)
+    this.checkMobileStatus();
+
     if (!this.isLaunched) {
       // Follow paddle if not launched
       const paddleElement = document.getElementById('paddle');
@@ -108,8 +125,8 @@ export class Ball {
       this.velocity.y *= factor;
     }
 
-    // Ensure speed doesn't exceed maximum
-    const maxSpeed = GAME_CONFIG.game.maxSpeed;
+    // Ensure speed doesn't exceed maximum (mobile-specific)
+    const maxSpeed = this.isMobile ? GAME_CONFIG.game.mobileMaxSpeed : GAME_CONFIG.game.maxSpeed;
     if (currentSpeed > maxSpeed) {
       const factor = maxSpeed / currentSpeed;
       this.velocity.x *= factor;
@@ -118,7 +135,7 @@ export class Ball {
 
     // Log speed changes occasionally
     if (Math.random() < 0.001) { // Log occasionally to avoid spam
-      console.log(`Ball speed: ${currentSpeed.toFixed(2)}, Multiplier: ${speedMultiplier.toFixed(2)}, Target: ${targetSpeed.toFixed(2)}`);
+      console.log(`Ball speed: ${currentSpeed.toFixed(2)}, Multiplier: ${speedMultiplier.toFixed(2)}, Target: ${targetSpeed.toFixed(2)}, Max: ${maxSpeed.toFixed(2)}, Mobile: ${this.isMobile}`);
     }
   }
 
