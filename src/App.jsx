@@ -1,4 +1,4 @@
-import { Skiper39 } from "@/components/v1/skiper39";
+import Skiper39 from "@/components/Skiper39";
 
 function App() {
   return <Skiper39 />;
