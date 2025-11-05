@@ -1,0 +1,15 @@
+/* Custom styles that complement Tailwind CSS */
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 3rem;
+}
+
+p {
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
